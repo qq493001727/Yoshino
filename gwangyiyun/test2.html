@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body {
+				overflow-X: hidden;
+			}
+
+			#box1 {
+				width: 150px;
+				height: 200px;
+				background-color: red;
+				position: absolute;
+				left: -150px;
+				top: 100px;
+			}
+
+			#box1 span {
+				width: 20px;
+				height: 60px;
+				line-height: 20px;
+				display: inline-block;
+				position: absolute;
+				right: -20px;
+				top: 70px;
+				cursor: default;
+			}
+
+			#homeh {
+				width: 150px;
+				height: 200px;
+				background-color: red;
+				position: absolute;
+				right: -150px;
+				top: 100px;
+			}
+
+			#homeh span {
+				width: 20px;
+				height: 60px;
+				line-height: 20px;
+				display: inline-block;
+				position: absolute;
+				left: -20px;
+				top: 70px;
+				cursor: default;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box1">
+			<span>回到顶部</span>
+		</div>
+		<div id="homeh">
+			<span>回到顶部</span>
+		</div>
+	</body>
+	<script>
+		//左侧效果
+		(function() {
+			var oDiv = document.getElementById('box1');
+			var handler = null;
+			oDiv.onmouseover = function() {
+				startMove(0);
+			};
+			oDiv.onmouseout = function() {
+				startMove(-150);
+			};
+
+			function startMove(target) {
+				clearInterval(handler);
+				var speed;
+				if (oDiv.offsetLeft > target) {
+					speed = -5;
+				} else {
+					speed = 5;
+				};
+				handler = setInterval(function() {
+					if (oDiv.offsetLeft == target) {
+						clearInterval(handler);
+					} else {
+						oDiv.style.left = oDiv.offsetLeft + speed + 'px';
+					};
+				}, 30);
+			};
+		})();
+
+
+
+		//右侧效果
+		(function() {
+			var oDiv = document.getElementById('box2');
+			var handler = null;
+			var bodyWidth = document.documentElement.clientWidth; //获取可视区域的宽度 
+			oDiv.onmouseover = function() {
+				startMove(bodyWidth - 150);
+			};
+			oDiv.onmouseout = function() {
+				startMove(bodyWidth);
+			};
+
+			function startMove(target) {
+				clearInterval(handler);
+				var speed;
+				if (oDiv.offsetLeft > target) {
+					speed = -5;
+				} else {
+					speed = 5;
+				};
+				handler = setInterval(function() {
+					if (oDiv.offsetLeft == target) {
+						clearInterval(handler);
+					} else {
+						oDiv.style.left = oDiv.offsetLeft + speed + 'px';
+					};
+				}, 30);
+			};
+		})();
+	</script>
+</html>
